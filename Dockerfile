@@ -12,7 +12,7 @@ USER node
 
 COPY --chown=node:node . .
 
-COPY --chown=node:node config/.env .env
+COPY --chown=node:node .env .env
 
 EXPOSE 4545
 
