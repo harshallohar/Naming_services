@@ -1,20 +1,15 @@
-FROM node:19-alpine
+FROM node:18.14.0
 
-RUN mkdir -p /home/node/app/node_modules && chown -R node:node /home/node/app
+WORKDIR /app
 
-WORKDIR /home/node/app
+ENV NODE_ENV = production
 
 COPY package*.json ./
 
-RUN npm install
+RUN npm ci --include=dev
 
-USER node
-
-COPY --chown=node:node . .
-
-COPY --chown=node:node .env .env
+COPY . .
 
 EXPOSE 4545
 
-CMD [ "node", "index.mjs" ]
-
+CMD ["npm","run", "dev" ]
